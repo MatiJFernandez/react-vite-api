@@ -1,33 +1,82 @@
-# react-vite-api
+# 🦄 Unicorns & Products App
+
+Este proyecto es una SPA (Single Page Application) construida con **React + Vite**, que permite gestionar un CRUD de unicornios y otro de productos. Se aplicaron buenas prácticas de modularización, manejo de formularios, rutas y contexto.
+
 ---
-📝 Enunciado: Consumo de API pública y visualización en tabla
-Como desarrollador frontend, uno de los desafíos más comunes es obtener información desde una API y mostrarla al usuario de manera clara y organizada. En este ejercicio vas a practicar eso mismo.
-✅ Consigna:
-Seleccioná una API pública gratuita que no requiera autenticación (por ejemplo: JSONPlaceholder, PokeAPI, REST Countries, etc.).
 
+## 🚀 Instalación y ejecución
 
-Realizá una petición GET utilizando fetch() dentro de un useEffect() en React.
+1. **Clonar el repositorio:**
 
+   ```bash
+   git clone https://github.com/MatiJFernandez/react-vite-api.git
+   cd nombre-del-repo
+   ```
 
-Guardá los datos obtenidos en una variable de estado utilizando useState().
+2. **Instalar dependencias:**
 
+   ```bash
+   npm install
+   ```
 
-Mostrá los datos en una tabla dentro de tu componente. Usá al menos 3 columnas con información relevante del objeto recibido.
+3. **Iniciar el proyecto:**
 
+   ```bash
+   npm run dev
+   ```
 
-🔧 Requisitos técnicos:
-Utilizá React (Vite o CRA).
+4. **Abrir en el navegador:**
 
+   Visitar [http://localhost:5173](http://localhost:5173) o el link que muestre la consola.
 
-Utilizá useState y useEffect.
+---
 
+## 📁 Estructura del proyecto
 
-Mostrá la tabla en pantalla con los datos obtenidos.
+```
+src/
+│
+├── context/              // Contexto global de unicornios
+│   └── UnicornContext.jsx
+│
+├── unicorns/             // Módulo de unicornios (usa contexto)
+│   ├── UnicornsView.jsx
+│   ├── UnicornForm.jsx
+│   └── index.jsx
+│
+├── products/             // Módulo de productos (independiente)
+│   ├── ProductsView.jsx
+│   ├── ProductForm.jsx
+│   ├── productsData.js
+│   └── index.jsx
+│
+├── App.jsx               // Ruteo principal
+└── main.jsx              // Punto de entrada
+```
 
+---
 
-Mostrá en consola un mensaje de error si la API no responde correctamente.
+## ✅ Tecnologías usadas
 
+- **React + Vite**
+- **React Router DOM**
+- **Context API**
+- **Formik + Yup** (para formularios con validaciones)
+- **PrimeReact** (estilos)
+- **localStorage** (persistencia simple)
+- **Toasts y animaciones** (bonus)
 
-📌 Ejemplo:
-Si usás la API de países, podés mostrar una tabla con columnas como:
- Nombre del país, Capital, Región.
+---
+
+## 📌 Notas
+
+- El CRUD de unicornios usa Context para manejar el estado global.
+- El CRUD de productos es completamente independiente (usa useState).
+- Las rutas están organizadas por módulos: `/unicornios` y `/productos`.
+
+---
+
+### Notas para ti:
+
+- **Recuerda actualizar el enlace del repositorio** en el primer paso, reemplazando `https://github.com/tuusuario/nombre-del-repo.git` por la URL de tu propio repositorio.
+- Asegúrate de incluir cualquier otra instrucción que consideres necesaria según las características específicas de tu proyecto.
