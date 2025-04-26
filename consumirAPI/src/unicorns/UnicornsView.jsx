@@ -1,32 +1,46 @@
 import { useUnicorns } from "../context/UnicornContext";
 import { useNavigate } from "react-router-dom";
+import { Button } from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import { useRef, useState } from 'react';
 
 const UnicornsView = () => {
   const { unicorns, deleteUnicorn } = useUnicorns();
   const navigate = useNavigate();
+  const toast = useRef(null); // Para mostrar notificaciones
+
+  const [selectedUnicorns, setSelectedUnicorns] = useState(null);
+
+  // Manejo de eliminaciones con notificación
+  const handleDelete = (id) => {
+    deleteUnicorn(id);
+    toast.current.show({ severity: 'success', summary: 'Eliminado', detail: 'Unicornio eliminado', life: 3000 });
+  };
 
   return (
-    <div>
+    <div className="unicorns-container">
+      {/* Toast para mensajes */}
+      <Toast ref={toast} />
+
       <h2>Unicornios</h2>
-      <button onClick={() => navigate("/unicornios/crear")}>Crear Nuevo</button>
-      <table>
-        <thead>
-          <tr><th>Nombre</th><th>Edad</th><th>Color</th><th>Acciones</th></tr>
-        </thead>
-        <tbody>
-          {unicorns.map(u => (
-            <tr key={u.id}>
-              <td>{u.nombre}</td>
-              <td>{u.edad}</td>
-              <td>{u.color}</td>
-              <td>
-                <button onClick={() => navigate(`/unicornios/editar/${u.id}`)}>Editar</button>
-                <button onClick={() => deleteUnicorn(u.id)}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+      {/* Botón para crear nuevo unicornio */}
+      <Button label="Crear Nuevo" icon="pi pi-plus" onClick={() => navigate("/unicornios/crear")} className="p-button-success" />
+
+      {/* DataTable para mostrar los unicornios */}
+      <DataTable value={unicorns} paginator rows={5} selection={selectedUnicorns} onSelectionChange={e => setSelectedUnicorns(e.value)}>
+        <Column field="nombre" header="Nombre" />
+        <Column field="edad" header="Edad" />
+        <Column field="color" header="Color" />
+        <Column body={(rowData) => (
+          <>
+            <Button label="Editar" icon="pi pi-pencil" onClick={() => navigate(`/unicornios/editar/${rowData.id}`)} className="p-button-info p-mr-2" />
+            <Button label="Eliminar" icon="pi pi-trash" onClick={() => handleDelete(rowData.id)} className="p-button-danger" />
+          </>
+        )} header="Acciones" />
+      </DataTable>
     </div>
   );
 };
