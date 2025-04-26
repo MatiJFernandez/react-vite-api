@@ -75,8 +75,3 @@ src/
 - Las rutas están organizadas por módulos: `/unicornios` y `/productos`.
 
 ---
-
-### Notas para ti:
-
-- **Recuerda actualizar el enlace del repositorio** en el primer paso, reemplazando `https://github.com/tuusuario/nombre-del-repo.git` por la URL de tu propio repositorio.
-- Asegúrate de incluir cualquier otra instrucción que consideres necesaria según las características específicas de tu proyecto.
