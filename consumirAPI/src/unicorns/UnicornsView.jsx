@@ -9,11 +9,10 @@ import { useRef, useState } from 'react';
 const UnicornsView = () => {
   const { unicorns, deleteUnicorn } = useUnicorns();
   const navigate = useNavigate();
-  const toast = useRef(null); // Para mostrar notificaciones
+  const toast = useRef(null); 
 
   const [selectedUnicorns, setSelectedUnicorns] = useState(null);
 
-  // Manejo de eliminaciones con notificación
   const handleDelete = (id) => {
     deleteUnicorn(id);
     toast.current.show({ severity: 'success', summary: 'Eliminado', detail: 'Unicornio eliminado', life: 3000 });
@@ -21,15 +20,12 @@ const UnicornsView = () => {
 
   return (
     <div className="unicorns-container">
-      {/* Toast para mensajes */}
       <Toast ref={toast} />
 
       <h2>Unicornios</h2>
 
-      {/* Botón para crear nuevo unicornio */}
       <Button label="Crear Nuevo" icon="pi pi-plus" onClick={() => navigate("/unicornios/crear")} className="p-button-success" />
 
-      {/* DataTable para mostrar los unicornios */}
       <DataTable value={unicorns} paginator rows={5} selection={selectedUnicorns} onSelectionChange={e => setSelectedUnicorns(e.value)}>
         <Column field="nombre" header="Nombre" />
         <Column field="edad" header="Edad" />
