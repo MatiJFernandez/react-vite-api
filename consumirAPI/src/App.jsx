@@ -1,10 +1,23 @@
-import CrudApp from './components/CrudApp';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { UnicornProvider } from './context/UnicornContext'; // 👈 ¡esto es clave!
+import UnicornRoutes from './unicorns';
+import ProductRoutes from './products';
 
 function App() {
   return (
-    <div>
-      <CrudApp />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/unicornios" />} />
+        
+        <Route path="/unicornios/*" element={
+          <UnicornProvider> {/* ✅ envolver solo las rutas unicornio */}
+            <UnicornRoutes />
+          </UnicornProvider>
+        } />
+        
+        <Route path="/productos/*" element={<ProductRoutes />} />
+      </Routes>
+    </Router>
   );
 }
 
