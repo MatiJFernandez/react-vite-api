@@ -1,7 +1,7 @@
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-
+import './styles/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UnicornProvider } from './context/UnicornContext';
 import UnicornRoutes from './unicorns';

@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 
-
 const Navbar = () => {
   return (
-    <nav style={{ display: 'flex', justifyContent: 'space-around', padding: '10px', background: '#f4f4f4' }}>
-      <Link to="/">Home</Link>
-      <Link to="/unicornios">Unicorns</Link>
-      <Link to="/productos">Products</Link>
+    <nav className="bg-gray-800 text-white p-4 shadow-md flex justify-between items-center">
+      <Link className="text-blue-400 hover:text-blue-300 font-medium" to="/">Home</Link>
+      <Link className="text-blue-400 hover:text-blue-300 font-medium" to="/unicornios">Unicorns</Link>
+      <Link className="text-blue-400 hover:text-blue-300 font-medium" to="/productos">Products</Link>
     </nav>
   );
 };

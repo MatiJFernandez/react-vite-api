@@ -1,19 +1,64 @@
-/* Basic styles for the Navbar component */
+/* Enhanced styles for the Navbar component inspired by Docker's website */
 .navbar {
-  background-color: #333;
+  background-color: #0d1117;
   color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
-  color: white;
+  color: #58a6ff;
   text-decoration: none;
   margin: 0 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .navbar a:hover {
+  color: #1f6feb;
   text-decoration: underline;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #58a6ff;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .menu-item {
+  position: relative;
+}
+
+.navbar .menu-item:hover .dropdown {
+  display: block;
+}
+
+.navbar .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #161b22;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .dropdown a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.navbar .dropdown a:hover {
+  color: #1f6feb;
 }
