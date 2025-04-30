@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { productsData } from "./productsData";
 import { Link } from "react-router-dom";
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
 
 const ProductsView = () => {
   const [products, setProducts] = useState([]);
@@ -19,22 +17,25 @@ const ProductsView = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center' }}>Lista de Productos</h2>
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+    <div className="p-6">
+      <h2 className="text-center text-2xl font-bold mb-6">Lista de Productos</h2>
+      <div className="text-center mb-6">
         <Link to="/productos/crear">
-          <Button label="Agregar Producto" icon="pi pi-plus" className="p-button-success" />
+          <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Agregar Producto</button>
         </Link>
       </div>
-      <div className="p-grid">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="p-col-12 p-md-4">
-            <Card title={product.name} subTitle={`$${product.price}`} style={{ marginBottom: '20px' }}>
-              <p>{product.description}</p>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button label="Eliminar" icon="pi pi-trash" className="p-button-danger" onClick={() => deleteProduct(product.id)} />
-              </div>
-            </Card>
+          <div key={product.id} className="border rounded-lg p-4 shadow-md">
+            <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+            <p className="text-gray-700 mb-4">${product.price}</p>
+            <p className="text-gray-600 mb-4">{product.description}</p>
+            <button 
+              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 w-full"
+              onClick={() => deleteProduct(product.id)}
+            >
+              Eliminar
+            </button>
           </div>
         ))}
       </div>
