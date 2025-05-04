@@ -1,3 +1,4 @@
+// Este archivo es el punto de entrada principal de la aplicación, donde se configuran las rutas y el contexto global.
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';

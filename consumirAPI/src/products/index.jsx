@@ -1,3 +1,4 @@
+// Este archivo define las rutas relacionadas con los productos en la aplicación.
 import { Routes, Route } from 'react-router-dom';
 import ProductsView from './ProductsView';
 import ProductForm from './ProductForm';

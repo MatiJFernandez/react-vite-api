@@ -1,3 +1,5 @@
+// Este archivo define la página de inicio de la aplicación, proporcionando enlaces a las secciones principales.
+
 import { Link } from 'react-router-dom';
  
 

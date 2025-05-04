@@ -1,3 +1,4 @@
+// Este archivo define un componente base reutilizable para formularios con validación.
 import { useFormik } from "formik";
 import * as Yup from "yup";
 

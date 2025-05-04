@@ -1,4 +1,4 @@
-
+// Este archivo inicializa la aplicación y monta el componente principal en el DOM.
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 

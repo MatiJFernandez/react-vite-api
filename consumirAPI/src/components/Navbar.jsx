@@ -1,3 +1,4 @@
+// Este archivo define el componente de navegación principal de la aplicación.
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {

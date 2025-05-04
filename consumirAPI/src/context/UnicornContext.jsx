@@ -1,4 +1,6 @@
+// Este archivo proporciona un contexto global para gestionar el estado de los unicornios en la aplicación.
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../api/api"; // Asegurate que esta ruta sea correcta
 
 const UnicornContext = createContext();
 
@@ -8,28 +10,43 @@ export const UnicornProvider = ({ children }) => {
   const [unicorns, setUnicorns] = useState([]);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("unicorns")) || [];
-    setUnicorns(saved);
+    getUnicorns();
   }, []);
 
-  const persist = (data) => {
-    setUnicorns(data);
-    localStorage.setItem("unicorns", JSON.stringify(data));
+  const getUnicorns = async () => {
+    try {
+      const res = await api.get("/unicorns");
+      setUnicorns(res.data);
+    } catch (error) {
+      console.error("Error al obtener unicornios:", error);
+    }
   };
 
-  const createUnicorn = (newUnicorn) => {
-    const updated = [...unicorns, { id: crypto.randomUUID(), ...newUnicorn }];
-    persist(updated);
+  const createUnicorn = async (newUnicorn) => {
+    try {
+      await api.post("/unicorns", newUnicorn);
+      getUnicorns(); // Refrescar lista
+    } catch (error) {
+      console.error("Error al crear unicornio:", error);
+    }
   };
 
-  const editUnicorn = (id, updatedData) => {
-    const updated = unicorns.map(u => u.id === id ? { ...u, ...updatedData } : u);
-    persist(updated);
+  const editUnicorn = async (id, updatedData) => {
+    try {
+      await api.put(`/unicorns/${id}`, updatedData);
+      getUnicorns();
+    } catch (error) {
+      console.error("Error al editar unicornio:", error);
+    }
   };
 
-  const deleteUnicorn = (id) => {
-    const updated = unicorns.filter(u => u.id !== id);
-    persist(updated);
+  const deleteUnicorn = async (id) => {
+    try {
+      await api.delete(`/unicorns/${id}`);
+      getUnicorns();
+    } catch (error) {
+      console.error("Error al eliminar unicornio:", error);
+    }
   };
 
   return (

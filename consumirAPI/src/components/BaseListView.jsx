@@ -1,3 +1,5 @@
+// Este archivo define un componente base reutilizable para mostrar listas de elementos.
+
 const BaseListView = ({ title, items, onEdit, onDelete, fields, createPath }) => {
   return (
     <div className="p-6">

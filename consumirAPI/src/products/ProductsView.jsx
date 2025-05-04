@@ -1,3 +1,4 @@
+// Este archivo muestra una lista de productos y permite editarlos o eliminarlos.
 import BaseListView from "../components/BaseListView";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
