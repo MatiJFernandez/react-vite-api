@@ -10,7 +10,7 @@ const UnicornForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const isEdit = !!id;
-  const unicornToEdit = unicorns.find((u) => u.id === id);
+  const unicornToEdit = unicorns.find((u) => u._id === id);
 
   const handleSubmit = (values) => {
     if (isEdit) {
