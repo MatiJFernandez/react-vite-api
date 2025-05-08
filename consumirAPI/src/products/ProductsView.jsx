@@ -13,7 +13,9 @@ const ProductsView = () => {
   }, []);
 
   const handleDelete = (id) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
+    const updatedProducts = products
+      .filter((product) => product && product.id) // solo productos válidos con id
+      .filter((product) => product.id.toString() !== id.toString());
     setProducts(updatedProducts);
     localStorage.setItem("products", JSON.stringify(updatedProducts));
   };

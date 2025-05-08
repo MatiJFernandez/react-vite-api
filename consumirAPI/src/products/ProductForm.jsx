@@ -13,13 +13,13 @@ const ProductForm = () => {
   const toast = useRef(null);
 
   const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
-  const productToEdit = storedProducts.find((product) => product.id === id?.toString());
+  const productToEdit = storedProducts.find((product) => product.id && product.id.toString() === id?.toString());
 
   const handleSubmit = (values) => {
     try {
       if (isEdit) {
         const updatedProducts = storedProducts.map((product) =>
-          product.id === id ? { ...product, ...values } : product
+          product.id && product.id.toString() === id.toString() ? { ...product, ...values } : product
         );
         localStorage.setItem("products", JSON.stringify(updatedProducts));
         toast.current.show({ severity: 'success', summary: 'Producto actualizado', detail: 'El producto ha sido actualizado correctamente', life: 3000 });
