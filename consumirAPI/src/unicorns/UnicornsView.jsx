@@ -65,7 +65,7 @@ const UnicornsView = () => {
           { name: "nombre", label: "Nombre" },
           { name: "edad", label: "Edad" },
           { name: "color", label: "Color" },
-          { name: "estado", label: "Estado" },
+          { name: "poder", label: "Poder" },
         ]}
         createPath="/unicornios/crear"
       />

@@ -23,7 +23,7 @@ const UnicornForm = () => {
 
   return (
     <BaseForm
-      initialValues={unicornToEdit || { nombre: "", edad: "", color: "" }}
+      initialValues={unicornToEdit || { nombre: "", edad: "", color: "", poder: "" }}
       validationSchema={{
         nombre: Yup.string().required("Requerido"),
         edad: Yup.number()
@@ -32,12 +32,14 @@ const UnicornForm = () => {
           .integer("Debe ser un número entero")
           .required("Requerido"),
         color: Yup.string().required("Requerido"),
+        poder: Yup.string().required("Requerido"),
       }}
       onSubmit={handleSubmit}
       fields={[
         { name: "nombre", label: "Nombre" },
         { name: "edad", label: "Edad", type: "number" },
         { name: "color", label: "Color" },
+        { name: "poder", label: "Poder" },
       ]}
     />
   );

@@ -42,10 +42,17 @@ export const UnicornProvider = ({ children }) => {
 
   const deleteUnicorn = async (id) => {
     try {
-      await api.delete(`/unicorns/${id}`);
-      getUnicorns();
+      const response = await api.delete(`/unicorns/${id}`);
+      if (response.status === 200) {
+        await getUnicorns(); // Solo actualizamos si la eliminación fue exitosa
+      }
     } catch (error) {
-      console.error("Error al eliminar unicornio:", error);
+      console.error("Error al eliminar unicornio:", error.response?.data || error.message);
+      if (error.response?.status === 404) {
+        console.error("El unicornio no existe o ya fue eliminado");
+      } else if (error.response?.status === 401) {
+        console.error("El token de la API ha expirado. Por favor, actualiza el token en src/api/api.js");
+      }
     }
   };
 
