@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useUnicorns } from "../context/UnicornContext";
 import { useEffect } from "react";
 import * as Yup from "yup";
+import { useUnicornForm } from "./useUnicornForm";
 
 const UnicornForm = () => {
   const { unicorns, createUnicorn, editUnicorn } = useUnicorns();
@@ -21,26 +22,30 @@ const UnicornForm = () => {
     navigate("/unicornios");
   };
 
+  const initialValues = {
+    nombre: unicornToEdit?.nombre || "",
+    edad: unicornToEdit?.edad || "",
+    color: unicornToEdit?.color || "",
+    poder: unicornToEdit?.poder || "",
+  };
+
+  const formik = useUnicornForm({
+    initialValues: initialValues,
+    onSubmit: handleSubmit,
+  });
+
   return (
     <BaseForm
-      initialValues={unicornToEdit || { nombre: "", edad: "", color: "", poder: "" }}
-      validationSchema={{
-        nombre: Yup.string().required("Requerido"),
-        edad: Yup.number()
-          .typeError("Debe ser un número")
-          .positive("Debe ser mayor que 0")
-          .integer("Debe ser un número entero")
-          .required("Requerido"),
-        color: Yup.string().required("Requerido"),
-        poder: Yup.string().required("Requerido"),
-      }}
-      onSubmit={handleSubmit}
+      initialValues={formik.initialValues}
+      validationSchema={{}} // La validación ya está en el hook
+      onSubmit={formik.handleSubmit}
       fields={[
         { name: "nombre", label: "Nombre" },
         { name: "edad", label: "Edad", type: "number" },
         { name: "color", label: "Color" },
         { name: "poder", label: "Poder" },
       ]}
+      formik={formik}
     />
   );
 };

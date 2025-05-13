@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useUnicorns } from "../context/UnicornContext";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { Toast } from 'primereact/toast';
+import { useRef } from 'react';
 
 const UnicornsView = () => {
   const { unicorns, deleteUnicorn } = useUnicorns();
   const navigate = useNavigate();
+  const toast = useRef(null);
 
   const exportToPDF = () => {
     const doc = new jsPDF();
@@ -52,24 +55,39 @@ const UnicornsView = () => {
   };
 
   return (
-    <>
-      <button onClick={exportToPDF} className="btn btn-primary">
-        Exportar PDF
-      </button>
-      <BaseListView
-        title="Lista de Unicornios"
-        items={unicorns}
-        onEdit={(id) => navigate(`/unicornios/editar/${id}`)}
-        onDelete={deleteUnicorn}
-        fields={[
-          { name: "nombre", label: "Nombre" },
-          { name: "edad", label: "Edad" },
-          { name: "color", label: "Color" },
-          { name: "poder", label: "Poder" },
-        ]}
-        createPath="/unicornios/crear"
-      />
-    </>
+    <div className="bg-gray-50 min-h-screen py-8">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <Toast ref={toast} />
+        <h2 className="text-center text-3xl font-extrabold mb-8 text-indigo-700 drop-shadow">Lista de Unicornios</h2>
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={exportToPDF}
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition duration-200"
+          >
+            <span className="pi pi-file-pdf text-lg"></span>
+            Exportar PDF
+          </button>
+        </div>
+        <BaseListView
+          title=""
+          items={unicorns}
+          onEdit={(id) => navigate(`/unicornios/editar/${id}`)}
+          onDelete={async (id) => {
+            await deleteUnicorn(id);
+            if (toast.current) {
+              toast.current.show({ severity: 'success', summary: 'Unicornio eliminado', detail: 'El unicornio ha sido eliminado correctamente', life: 3000 });
+            }
+          }}
+          fields={[
+            { name: "nombre", label: "Nombre" },
+            { name: "edad", label: "Edad" },
+            { name: "color", label: "Color" },
+            { name: "poder", label: "Poder" },
+          ]}
+          createPath="/unicornios/crear"
+        />
+      </div>
+    </div>
   );
 };
 

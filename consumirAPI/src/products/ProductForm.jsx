@@ -29,7 +29,9 @@ const ProductForm = () => {
         localStorage.setItem("products", JSON.stringify(storedProducts));
         toast.current.show({ severity: 'success', summary: 'Producto creado', detail: 'El producto ha sido creado correctamente', life: 3000 });
       }
-      navigate("/productos");
+      setTimeout(() => {
+        navigate("/productos");
+      }, 1000); // Espera 1 segundo antes de navegar
     } catch (error) {
       toast.current.show({ severity: 'error', summary: 'Error', detail: 'Ocurrió un error al guardar el producto', life: 3000 });
     }

@@ -1,4 +1,14 @@
-// Este archivo define la página de inicio de la aplicación, proporcionando enlaces a las secciones principales.
+/**
+ * Home.jsx
+ * 
+ * Componente de la página principal de la aplicación.
+ * Sirve como landing page y punto de entrada a las diferentes secciones.
+ * 
+ * Características:
+ * - Presentación inicial de la aplicación
+ * - Navegación a las diferentes secciones
+ * - Información general sobre la aplicación
+ */
 
 import { Link } from 'react-router-dom';
  

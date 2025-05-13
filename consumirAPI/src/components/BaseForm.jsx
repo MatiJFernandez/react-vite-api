@@ -2,8 +2,8 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const BaseForm = ({ initialValues, validationSchema, onSubmit, fields }) => {
-  const formik = useFormik({
+const BaseForm = ({ initialValues, validationSchema, onSubmit, fields, formik: externalFormik }) => {
+  const formik = externalFormik || useFormik({
     initialValues,
     validationSchema: Yup.object(validationSchema),
     onSubmit,

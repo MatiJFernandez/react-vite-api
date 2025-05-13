@@ -1,6 +1,6 @@
 // Este archivo proporciona un contexto global para gestionar el estado de los unicornios en la aplicación.
 import { createContext, useContext, useEffect, useState } from "react";
-import { api } from "../api/api"; // Asegurate que esta ruta sea correcta
+import { api } from "../api/api";
 
 const UnicornContext = createContext();
 
@@ -33,7 +33,9 @@ export const UnicornProvider = ({ children }) => {
 
   const editUnicorn = async (id, updatedData) => {
     try {
-      await api.put(`/unicorns/${id}`, updatedData);
+      // Clona el objeto y elimina _id
+      const { _id, ...dataToSend } = updatedData;
+      await api.put(`/unicorns/${id}`, dataToSend);
       getUnicorns();
     } catch (error) {
       console.error("Error al editar unicornio:", error);

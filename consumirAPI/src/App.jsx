@@ -1,4 +1,16 @@
-// Este archivo es el punto de entrada principal de la aplicación, donde se configuran las rutas y el contexto global.
+/**
+ * App.jsx
+ * 
+ * Componente principal de la aplicación.
+ * Define la estructura base y el enrutamiento de la aplicación.
+ * 
+ * Características:
+ * - Configuración de rutas principales
+ * - Layout base de la aplicación
+ * - Manejo de navegación
+ * - Integración de componentes globales
+ */
+
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -8,22 +20,39 @@ import { UnicornProvider } from './context/UnicornContext';
 import UnicornRoutes from './unicorns';
 import ProductRoutes from './products';
 import Home from './Home';
-import Navbar from './components/Navbar'; 
+import Navbar from './components/Navbar';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <Router>
-      <Navbar /> {/* Add the Navbar component here */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/unicornios/*" element={
-          <UnicornProvider>
-            <UnicornRoutes />
-          </UnicornProvider>
-        } />
-        <Route path="/productos/*" element={<ProductRoutes />} />
-      </Routes>
-    </Router>
+    <>
+      {/* Contenedor de notificaciones toast */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/unicornios/*" element={
+            <UnicornProvider>
+              <UnicornRoutes />
+            </UnicornProvider>
+          } />
+          <Route path="/productos/*" element={<ProductRoutes />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
